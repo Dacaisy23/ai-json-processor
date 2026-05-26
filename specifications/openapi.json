@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.3",
   "info": {
     "title": "AI JSON Processor API",
     "version": "1.0.0",
@@ -9,9 +9,33 @@
     "/v1/process-text": {
       "post": {
         "summary": "Transforms unstructured text using AI models",
+        "operationId": "processText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": ["text"]
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Successfully structured JSON response layout"
+            "description": "Successfully structured JSON response layout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           }
         }
       }
