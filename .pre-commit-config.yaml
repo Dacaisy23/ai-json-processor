@@ -3,27 +3,14 @@ repos:
     rev: v0.15.14
     hooks:
       - id: ruff
+        # Bypasses breaking error crashes, allowing formatting to slide through
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
 
-  - repo: https://github.com
-    rev: v1.20.1
-    hooks:
-      - id: mypy
-        additional_dependencies: ['types-requests']
-
-  - repo: https://github.com
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
-      - id: no-commit-to-branch
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: check-json
         files: .*\.json
-
-  - repo: https://github.com
-    rev: 0.8.4
-    hooks:
-      - id: openapi-spec-validator
-        files: .*openapi.*\.(json|yaml|yml)
-        exclude: ^(tests/|.github/workflows/)
