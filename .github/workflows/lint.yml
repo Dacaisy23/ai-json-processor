@@ -18,5 +18,12 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Auto Fix Windows Line Endings
+        # Convert any trailing CRLF indicators into Linux compliance styles natively
+        run: |
+          find . -name "*.py" -exec sed -i 's/\r$//' {} +
+          find . -name "*.json" -exec sed -i 's/\r$//' {} +
+          find . -name "*.yaml" -exec sed -i 's/\r$//' {} +
+
       - name: Run Pre-Commit Hooks
         uses: pre-commit/action@v3.0.1
