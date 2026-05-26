@@ -1,0 +1,20 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AI JSON Processor API",
+    "version": "1.0.0",
+    "description": "Serverless microservice turning raw text into clean schemas via Gemini."
+  },
+  "paths": {
+    "/v1/process-text": {
+      "post": {
+        "summary": "Transforms unstructured text using AI models",
+        "responses": {
+          "200": {
+            "description": "Successfully structured JSON response layout"
+          }
+        }
+      }
+    }
+  }
+}
