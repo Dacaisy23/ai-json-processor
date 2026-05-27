@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Structured JSON Processor</title>
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        body { background: radial-gradient(circle at top right, #1e1b4b, #0f172a); }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 shadow-2xl">
+        <h1 class="text-3xl font-extrabold bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent mb-2">
+            AI JSON Processor
+        </h1>
+        <p class="text-slate-400 text-sm mb-6">Transform unstructured messy text payloads into strict, validated JSON objects via Gemini.</p>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Raw Text Input</label>
+                <textarea id="inputText" rows="5" class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-4 text-slate-200 focus:outline-none focus:border-cyan-500 transition-colors placeholder-slate-600" placeholder="Type or paste messy text here... (Include the word 'urgent' to trigger backend priority flags)"></textarea>
+            </div>
+            
+            <button id="processBtn" class="w-full bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-medium py-3 rounded-xl shadow-lg transition-all transform active:scale-[0.98]">
+                Analyze with Gemini AI
+            </button>
+            
+            <div id="resultWrapper" class="hidden mt-6 space-y-2">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Structured JSON Output</label>
+                <pre id="jsonOutput" class="bg-slate-950 border border-slate-800 rounded-xl p-4 overflow-x-auto text-cyan-400 font-mono text-sm shadow-inner"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('processBtn').addEventListener('click', async () => {
+            const textInput = document.getElementById('inputText').value;
+            const btn = document.getElementById('processBtn');
+            const resultWrapper = document.getElementById('resultWrapper');
+            const jsonOutput = document.getElementById('jsonOutput');
+            
+            if (!textInput.trim()) return alert('Please enter some text first!');
+            
+            btn.innerText = 'Processing via Cloud...';
+            btn.disabled = true;
+            
+            // DYNAMIC WIRE: Replace the placeholder below with your live Render URL when ready!
+            const BACKEND_URL = "https://onrender.com";
+            
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: textInput })
+                });
+                
+                const data = await response.json();
+                jsonOutput.textContent = JSON.stringify(data, null, 2);
+                resultWrapper.classList.remove('hidden');
+            } catch (err) {
+                jsonOutput.textContent = JSON.stringify({ error: "Failed to connect to backend", message: err.message }, null, 2);
+                resultWrapper.classList.remove('hidden');
+            } finally {
+                btn.innerText = 'Analyze with Gemini AI';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
