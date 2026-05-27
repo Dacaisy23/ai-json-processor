@@ -19,7 +19,7 @@
         <div class="space-y-4">
             <div>
                 <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Raw Text Input</label>
-                <textarea id="inputText" rows="5" class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-4 text-slate-200 focus:outline-none focus:border-cyan-500 transition-colors placeholder-slate-600" placeholder="Type or paste messy text here... (Include the word 'urgent' to trigger backend priority flags)"></textarea>
+                <textarea id="inputText" rows="5" class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-4 text-slate-200 focus:outline-none focus:border-cyan-500 transition-colors placeholder-slate-600" placeholder="Type or paste messy text here..."></textarea>
             </div>
             
             <button id="processBtn" class="w-full bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-medium py-3 rounded-xl shadow-lg transition-all transform active:scale-[0.98]">
@@ -45,7 +45,7 @@
             btn.innerText = 'Processing via Cloud...';
             btn.disabled = true;
             
-            // DYNAMIC WIRE: Replace the placeholder below with your live Render URL when ready!
+            // WIRED MANUALLY TO ELIMINATE CACHE FAILS
             const BACKEND_URL = "https://onrender.com";
             
             try {
