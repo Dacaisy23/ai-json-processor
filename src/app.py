@@ -6,11 +6,11 @@ from pydantic import BaseModel
 
 app = FastAPI(title="AI JSON Processor API")
 
-# FIX: Allow the frontend browser application to connect smoothly
+# FIX: Set allow_credentials to False to match allow_origins=["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
