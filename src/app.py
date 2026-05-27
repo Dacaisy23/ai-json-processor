@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 app = FastAPI(title="AI JSON Processor API")
 
-# FIX: Set allow_credentials to False to match allow_origins=["*"]
+# Complete loose security alignment allowing free cross-origin handshakes
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -38,4 +38,6 @@ async def process_text(payload: TextPayload):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # DYNAMIC PORT FIX: Dynamically maps straight to Render's internal port rules
+    port_env = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port_env)
